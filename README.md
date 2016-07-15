@@ -1,6 +1,4 @@
-### A Simplest JavaScript Timer
-
-#### Usage
+### Usage
 
 ```html
 <script type="text/javascript" src="..path/timer.js"></script>
