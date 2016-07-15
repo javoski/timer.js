@@ -23,14 +23,7 @@
             interval: 1000
         }
         extend(this.options, options)
-        this._init()
         return this
-    }
-
-    Timer.prototype._init = function(){
-        this.startTime = 0
-        this.currentIndex = 0
-        this.stopFlag = false
     }
 
     Timer.prototype.start = function(param){
@@ -41,11 +34,14 @@
         }
         this.startTime = new Date().getTime()
         this.currentIndex = 0
+        this.stopFlag = false
         requestAnimationFrame(this._tick.bind(this))
+        return this
     }
 
     Timer.prototype.stop = function(){
         this.stopFlag = true
+        return this
     }
 
     Timer.prototype._tick = function(){
