@@ -5,20 +5,80 @@
     <title>Timer.js by xujiongbo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <style>
+      .demo-wrap {
+        text-align: center;
+      }
+      #countDown {
+        font-size: 3em;
+        color: #155799;
+      }
+      .demo-wrap .button {
+        cursor: pointer;
+        display: inline-block;
+        margin: 1rem .5rem;
+        color: #159957;
+        border-color: #159957;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 0.3rem;
+        padding: .4rem 2.4rem;
+        transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+      }
+      .demo-wrap .button:hover {
+        text-decoration: none;
+        color: #fff;
+        background-color: #159957; 
+      }
+      .input-control {
+        margin: 1em 0;
+      }
+      input, input:focus {
+        outline: none;
+        line-height: 1.5;
+        border-radius: 3px;
+      }
+      .input-control label {
+        display: inline-block;
+        width: 8em;
+        text-align: left;
+      }
+      .input-control input {
+        border: 1px solid #159957;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <section class="page-header">
       <h1 class="project-name">Timer.js</h1>
-      <h2 class="project-tagline">A Simplest JavaScript Timer</h2>
+      <h2 class="project-tagline">A Simple JavaScript Timer</h2>
       <a href="https://github.com/xujiongbo/timer.js" class="btn">View on GitHub</a>
       <a href="https://github.com/xujiongbo/timer.js/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/xujiongbo/timer.js/tarball/master" class="btn">Download .tar.gz</a>
     </section>
 
     <section class="main-content">
+      <h3>
+        <a id="demo" class="anchor" href="#demo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
+        Demo
+      </h3>
+      <div class="demo-wrap">
+        <div id="countDown">Stopped</div>
+        <div class="input-control">
+          <label for="interval">Interval(ms):</label>
+          <input type="number" name="interval" step="100" id="interval" value="1000">
+        </div>
+        <div class="input-control">
+          <label for="duration">Duration:</label>
+          <input type="number" name="duration" id="duration" value="5">
+        </div>
+        <a class="button" id="startBtn">Start</a>
+        <a class="button" id="stopBtn">Stop</a>
+      </div>
+        
       <h3>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h3>
 
@@ -48,6 +108,36 @@
 
     </section>
 
-  
+  <script src="js/timer.js"></script>
+  <script>
+    var countDown = document.querySelector('#countDown'),
+        interval = document.querySelector('#interval'),
+        duration = document.querySelector('#duration'),
+        startBtn = document.querySelector('#startBtn'),
+        stopBtn = document.querySelector('#stopBtn')
+    var timer = new Timer({
+      interval: 1000,
+      duration: 5,
+      ticking: function(count){
+        countDown.innerHTML = count
+      },
+      finish: function(isFinished){
+        if(isFinished)
+          countDown.innerHTML = 'Finished'
+        else
+          countDown.innerHTML = 'Stopped'
+      }
+    })
+    startBtn.addEventListener('click', function(){
+      countDown.innerHTML = '0'
+      timer.start({
+        interval: parseInt(interval.value),
+        duration: parseInt(duration.value)
+      })
+    })
+    stopBtn.addEventListener('click', function(){
+      timer.stop()
+    })
+  </script>
   </body>
 </html>

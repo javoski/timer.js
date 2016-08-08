@@ -1,6 +1,6 @@
 {
   "name": "Timer.js",
-  "tagline": "A Simplest JavaScript Timer",
+  "tagline": "A Simple JavaScript Timer",
   "body": "### Usage\r\n\r\n```html\r\n<script type=\"text/javascript\" src=\"..path/timer.js\"></script>\r\n```\r\n\r\n```javascript\r\nvar timer = new Timer({\r\n    interval: 1000, //ms\r\n    duration: 5,\r\n    ticking: function(current, total){\r\n        console.log('progress on:' + current + '/' + total)\r\n    },\r\n    finish: function(isFinished){\r\n        if(isFinished){\r\n            console.log('Is finished')\r\n        }else{\r\n            console.log('Is stopped')\r\n        }\r\n    }\r\n})\r\ntimer.start([duration | options])\r\n```\r\n",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
