@@ -5,11 +5,11 @@
 }(this, function() {
 
     var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || window.oRequestAnimationFrame ||
-        function(callback) {
+        function (callback) {
             setTimeout(callback, 1000 / 60)
         }
 
-    function extend(dest, src) {
+    function extend (dest, src) {
         for(var k in src){
             if(src.hasOwnProperty(k)){
                 dest[k] = src[k]
@@ -18,7 +18,7 @@
         return dest
     }
 
-    function Timer(options) {
+    function Timer (options) {
         if(this instanceof Timer) {
             this.options = {
                 interval: 1000
@@ -30,9 +30,9 @@
     }
 
     Timer.prototype.start = function (param) {
-        if(typeof param === 'number') {
+        if (typeof param === 'number') {
             this.options.duration = param
-        }else if(typeof param === 'object') {
+        }else if (typeof param === 'object') {
             extend(this.options, param)
         }
         this.startTime = new Date().getTime()
@@ -51,13 +51,13 @@
         var o = this.options
         var now = new Date().getTime()
         var current = Math.floor((now - this.startTime)/o.interval)
-        if(current >= o.duration || this.stopFlag) {
-            if(typeof o.finish === 'function')
+        if (current >= o.duration || this.stopFlag) {
+            if (typeof o.finish === 'function')
                 o.finish(!this.stopFlag)
             return
         }
-        if(this.currentIndex !== current) {
-            if(typeof o.ticking === 'function')
+        if (this.currentIndex !== current) {
+            if (typeof o.ticking === 'function')
                 o.ticking(current, o.duration)
             this.currentIndex = current
         }
